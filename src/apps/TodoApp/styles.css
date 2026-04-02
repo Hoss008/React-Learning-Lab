@@ -1,0 +1,21 @@
+.todo-title { font-size: 36px; font-weight: 800; margin-bottom: 8px; }
+.todo-hint { color: var(--text-muted); font-size: 14px; margin-bottom: 32px; }
+.todo-hint code { font-family: var(--font-mono); color: var(--accent3); background: rgba(77,255,180,0.1); padding: 2px 6px; border-radius: 4px; }
+.todo-input-row { display: flex; gap: 10px; margin-bottom: 20px; }
+.todo-input { flex: 1; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 15px; outline: none; transition: border-color 0.15s; }
+.todo-input:focus { border-color: var(--accent3); }
+.todo-add-btn { padding: 14px 24px; background: var(--accent3); color: #001a0d; font-weight: 700; border: none; border-radius: 10px; font-size: 15px; transition: all 0.15s; }
+.todo-add-btn:hover { transform: translateY(-2px); }
+.todo-filters { display: flex; gap: 8px; align-items: center; margin-bottom: 20px; }
+.filter-btn { padding: 6px 16px; background: transparent; border: 1px solid var(--border); border-radius: 100px; color: var(--text-muted); font-size: 13px; transition: all 0.15s; }
+.filter-btn.active { border-color: var(--accent3); color: var(--accent3); background: rgba(77,255,180,0.08); }
+.todo-count { margin-left: auto; font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); }
+.todo-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.todo-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; transition: all 0.15s; }
+.todo-item.done .todo-text { text-decoration: line-through; color: var(--text-muted); }
+.todo-check { width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 6px; background: transparent; color: var(--accent3); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
+.todo-item.done .todo-check { background: var(--accent3); border-color: var(--accent3); color: #001a0d; }
+.todo-text { flex: 1; font-size: 15px; }
+.todo-delete { background: transparent; border: none; color: var(--text-muted); font-size: 20px; line-height: 1; padding: 0 4px; transition: color 0.15s; }
+.todo-delete:hover { color: var(--accent2); }
+.todo-empty { text-align: center; color: var(--text-muted); padding: 40px; font-size: 14px; }
