@@ -1,0 +1,164 @@
+/* ====== Layout ====== */
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ====== Products Section ====== */
+.products {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.productsTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.productCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  transition: 0.2s ease;
+}
+
+.productCard:hover {
+  background-color: #fafafa;
+}
+
+.productInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.productEmoji {
+  font-size: 1.5rem;
+}
+
+.productName {
+  font-weight: 500;
+}
+
+.productPrice {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ====== Buttons ====== */
+.addButton {
+  background-color: #222;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #444;
+}
+
+.addButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* ====== Cart Section ====== */
+.cart {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cartTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.cartItems {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.cartItemInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.cartItemName {
+  font-weight: 500;
+}
+
+.cartItemPrice {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+/* ====== Remove Button ====== */
+.removeButton {
+  background: transparent;
+  border: none;
+  color: #d11a2a;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.removeButton:hover {
+  text-decoration: underline;
+}
+
+/* ====== Summary ====== */
+.summary {
+  margin-top: 2rem;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.total {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+/* ====== Empty State ====== */
+.emptyCart {
+  text-align: center;
+  color: #888;
+  margin-top: 2rem;
+}
