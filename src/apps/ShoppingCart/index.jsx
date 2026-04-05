@@ -31,22 +31,28 @@ function ProductItem({ PRODUCTS, onAddToCart }) {
   );
 }
 
-function Cart({remove , cartItems}){
-  <CartItem remove={remove} cartItems={cartItems} />
+function Cart({ remove, cartItems }) {
+  return <CartItem remove={remove} cartItems={cartItems} />;
 }
 
-function CartItem({cartItems , remove}){
-  return(
-    <>
-    {cartItems.map(({})=>(
-      <div className={styles.cart}>
-        <button className={styles.removeButton} onClick={() => remove(id)}>
+function CartItem({ cartItems, remove }) {
+  return (
+    <div className={styles.cartItems}>
+      {cartItems.map(({ id, name, price, emoji }) => (
+        <div className={styles.cartItem} key={id}>
+          <div className={styles.cartItemInfo}>
+            <span className={styles.cartItemName}>
+              {emoji} {name}
+            </span>
+            <p className={styles.cartItemPrice}>${price}</p>
+          </div>
+          <button className={styles.removeButton} onClick={() => remove(id)}>
             REMOVE
           </button>
-      </div>
-    ))}
-    </>
-  )
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default function ShoppingCart() {
@@ -68,7 +74,7 @@ export default function ShoppingCart() {
   return (
     <>
       <ProductList PRODUCTS={PRODUCTS} onAddToCart={addToCart} />
-      <Cart cartItems ={cartItems} remove={remove}/>
+      <Cart cartItems={cartItems} remove={remove} />
     </>
   );
 }
