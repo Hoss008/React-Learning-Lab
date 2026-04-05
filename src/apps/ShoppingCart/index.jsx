@@ -8,11 +8,11 @@ const PRODUCTS = [
   { id: 4, name: "Monitor Stand", price: 27.99, emoji: "🖥️" },
 ];
 
-function ProductList({ PRODUCTS }) {
-  return <ProductItem PRODUCTS={PRODUCTS} />;
+function ProductList({ PRODUCTS, onAddToCart }) {
+  return <ProductItem PRODUCTS={PRODUCTS} onAddToCart={onAddToCart} />;
 }
 
-function ProductItem({ PRODUCTS }) {
+function ProductItem({ PRODUCTS, onAddToCart }) {
   return (
     <>
       {PRODUCTS.map(({ id, emoji, name, price }) => (
@@ -22,21 +22,36 @@ function ProductItem({ PRODUCTS }) {
             <h3 className={styles.productName}>{name}</h3>
             <p className={styles.productPrice}>${price}</p>
           </div>
+          <button className={styles.addButton} onClick={() => onAddToCart(id)}>
+            Add to Cart
+          </button>
         </div>
       ))}
     </>
   );
 }
 
+
+
 export default function ShoppingCart() {
-  const [cartItems, setCartItems] = useState();
+  const [cartItems, setCartItems] = useState([]);
 
-  function addToCart() {}
+  function addToCart(id) {
+    setCartItems((prev) => {
+      const exists = prev.find((item) => item.id === id);
+      if (exists) return prev;
 
-  function remove() {}
+      const product = PRODUCTS.find((p) => p.id === id);
+      return [...prev, product];
+    });
+  }
+
+  function remove(id) {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  }
   return (
     <>
-      <ProductList PRODUCTS={PRODUCTS} />
+      <ProductList PRODUCTS={PRODUCTS} onAddToCart={addToCart} />
     </>
   );
 }
