@@ -31,7 +31,23 @@ function ProductItem({ PRODUCTS, onAddToCart }) {
   );
 }
 
+function Cart({remove , cartItems}){
+  <CartItem remove={remove} cartItems={cartItems} />
+}
 
+function CartItem({cartItems , remove}){
+  return(
+    <>
+    {cartItems.map(({})=>(
+      <div className={styles.cart}>
+        <button className={styles.removeButton} onClick={() => remove(id)}>
+            REMOVE
+          </button>
+      </div>
+    ))}
+    </>
+  )
+}
 
 export default function ShoppingCart() {
   const [cartItems, setCartItems] = useState([]);
@@ -52,6 +68,7 @@ export default function ShoppingCart() {
   return (
     <>
       <ProductList PRODUCTS={PRODUCTS} onAddToCart={addToCart} />
+      <Cart cartItems ={cartItems} remove={remove}/>
     </>
   );
 }
