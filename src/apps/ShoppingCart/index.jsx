@@ -32,7 +32,14 @@ function ProductItem({ PRODUCTS, onAddToCart }) {
 }
 
 function Cart({ remove, cartItems }) {
-  return <CartItem remove={remove} cartItems={cartItems} />;
+  const totalItems = cartItems.length;
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+  return(
+    <>
+    <CartItem remove={remove} cartItems={cartItems} />
+    <CartSummary totalItems={totalItems} totalPrice={totalPrice} />
+    </>
+  ) 
 }
 
 function CartItem({ cartItems, remove }) {
@@ -53,6 +60,21 @@ function CartItem({ cartItems, remove }) {
       ))}
     </div>
   );
+}
+
+function CartSummary({totalItems , totalPrice}) {
+  return(
+    <div className={styles.summary}>
+      <div className={styles.summaryRow}>
+        <span>Items:</span>
+        <span>{totalItems}</span>
+      </div>
+      <div className={styles.summaryRow}>
+        <span className={styles.total}>Total:</span>
+        <span className={styles.total}>${totalPrice.toFixed(2)}</span>
+      </div>
+    </div>
+  )
 }
 
 export default function ShoppingCart() {
