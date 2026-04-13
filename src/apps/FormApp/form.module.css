@@ -1,0 +1,133 @@
+.wrapper {
+  min-height: calc(100vh - 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 203, 119, 0.25),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(104, 169, 255, 0.2),
+      transparent 45%
+    ),
+    #f5f7fb;
+}
+
+.formCard {
+  width: min(100%, 460px);
+  padding: 1.5rem;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 16px 40px rgba(16, 24, 40, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.title {
+  margin: 0;
+  color: #172b4d;
+  font-size: 1.45rem;
+}
+
+.subtitle {
+  margin: 0 0 0.75rem;
+  color: #526581;
+  font-size: 0.95rem;
+}
+
+.label {
+  color: #334e68;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.input,
+.select {
+  width: 100%;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  font-size: 0.95rem;
+  color: #102a43;
+  background-color: #fff;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: #2680eb;
+  box-shadow: 0 0 0 3px rgba(38, 128, 235, 0.16);
+}
+
+.checkboxRow {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  color: #334e68;
+  font-size: 0.9rem;
+}
+
+.checkboxRow input {
+  margin-top: 0.1rem;
+}
+
+.submitButton {
+  margin-top: 0.75rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.submitButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(15, 118, 110, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+.result {
+  margin-top: 0.5rem;
+  border-radius: 10px;
+  padding: 0.9rem;
+  border: 1px solid #dbe3ef;
+  background-color: #f9fbff;
+}
+
+.result h3 {
+  margin: 0 0 0.55rem;
+  color: #1b365d;
+  font-size: 1rem;
+}
+
+.result p {
+  margin: 0.25rem 0;
+  color: #334e68;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .formCard {
+    padding: 1.1rem;
+    border-radius: 12px;
+  }
+}

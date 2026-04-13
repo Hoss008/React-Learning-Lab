@@ -7,6 +7,7 @@ import TodoApp from "./apps/TodoApp/index.jsx";
 import Calculator from "./apps/Calculator/index.jsx";
 import CounterApp from "./apps/CounterApp/index.jsx";
 import ShoppingCart from "./apps/ShoppingCart";
+import Form from "./apps/FormApp/index.jsx";
 // ─────────────────────────────────────────────────────────────────────
 
 // ─── REGISTER YOUR APPS HERE ─────────────────────────────────────────
@@ -46,6 +47,15 @@ export const APP_REGISTRY = [
     emoji: "🛒",
     accent: "#fad06d",
     component: ShoppingCart,
+  },
+  {
+    id: "form",
+    title: "Form App",
+    description: "Controlled components, validation, and submission",
+    tags: ["forms", "validation", "submission"],
+    color: "#6bffb8",
+    emoji: "📝",
+    component: Form,
   },
 ];
 // ─────────────────────────────────────────────────────────────────────
