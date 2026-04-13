@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./form.module.css";
- 
+
 /* ─── Sub-components ─────────────────────────── */
- 
+
 function StepIndicator({ currentStep }) {
   const steps = [
     { number: 1, label: "Personal" },
     { number: 2, label: "Account" },
     { number: 3, label: "Confirm" },
   ];
- 
+
   return (
     <div className={styles.stepIndicator}>
       {steps.map((s, i) => (
@@ -20,8 +20,8 @@ function StepIndicator({ currentStep }) {
                 currentStep === s.number
                   ? styles.stepActive
                   : currentStep > s.number
-                  ? styles.stepDone
-                  : ""
+                    ? styles.stepDone
+                    : ""
               }`}
             >
               {currentStep > s.number ? "✓" : s.number}
@@ -40,14 +40,16 @@ function StepIndicator({ currentStep }) {
     </div>
   );
 }
- 
+
 function StepOne({ formData, onChange, errors, onNext }) {
   return (
     <div className={styles.stepContent}>
       <h2 className={styles.title}>Personal Info</h2>
       <p className={styles.subtitle}>Tell us a bit about yourself</p>
- 
-      <label className={styles.label} htmlFor="firstName">First name</label>
+
+      <label className={styles.label} htmlFor="firstName">
+        First name
+      </label>
       <input
         id="firstName"
         name="firstName"
@@ -57,9 +59,13 @@ function StepOne({ formData, onChange, errors, onNext }) {
         value={formData.firstName}
         onChange={onChange}
       />
-      {errors.firstName && <span className={styles.error}>{errors.firstName}</span>}
- 
-      <label className={styles.label} htmlFor="lastName">Last name</label>
+      {errors.firstName && (
+        <span className={styles.error}>{errors.firstName}</span>
+      )}
+
+      <label className={styles.label} htmlFor="lastName">
+        Last name
+      </label>
       <input
         id="lastName"
         name="lastName"
@@ -69,9 +75,13 @@ function StepOne({ formData, onChange, errors, onNext }) {
         value={formData.lastName}
         onChange={onChange}
       />
-      {errors.lastName && <span className={styles.error}>{errors.lastName}</span>}
- 
-      <label className={styles.label} htmlFor="email">Email</label>
+      {errors.lastName && (
+        <span className={styles.error}>{errors.lastName}</span>
+      )}
+
+      <label className={styles.label} htmlFor="email">
+        Email
+      </label>
       <input
         id="email"
         name="email"
@@ -82,7 +92,7 @@ function StepOne({ formData, onChange, errors, onNext }) {
         onChange={onChange}
       />
       {errors.email && <span className={styles.error}>{errors.email}</span>}
- 
+
       <div className={styles.actions}>
         <button type="button" className={styles.primaryBtn} onClick={onNext}>
           Next →
@@ -91,14 +101,16 @@ function StepOne({ formData, onChange, errors, onNext }) {
     </div>
   );
 }
- 
+
 function StepTwo({ formData, onChange, errors, onNext, onBack }) {
   return (
     <div className={styles.stepContent}>
       <h2 className={styles.title}>Account Setup</h2>
       <p className={styles.subtitle}>Choose your credentials</p>
- 
-      <label className={styles.label} htmlFor="username">Username</label>
+
+      <label className={styles.label} htmlFor="username">
+        Username
+      </label>
       <input
         id="username"
         name="username"
@@ -108,9 +120,13 @@ function StepTwo({ formData, onChange, errors, onNext, onBack }) {
         value={formData.username}
         onChange={onChange}
       />
-      {errors.username && <span className={styles.error}>{errors.username}</span>}
- 
-      <label className={styles.label} htmlFor="role">Role</label>
+      {errors.username && (
+        <span className={styles.error}>{errors.username}</span>
+      )}
+
+      <label className={styles.label} htmlFor="role">
+        Role
+      </label>
       <select
         id="role"
         name="role"
@@ -122,8 +138,10 @@ function StepTwo({ formData, onChange, errors, onNext, onBack }) {
         <option value="developer">Developer</option>
         <option value="designer">Designer</option>
       </select>
- 
-      <label className={styles.label} htmlFor="password">Password</label>
+
+      <label className={styles.label} htmlFor="password">
+        Password
+      </label>
       <input
         id="password"
         name="password"
@@ -133,9 +151,13 @@ function StepTwo({ formData, onChange, errors, onNext, onBack }) {
         value={formData.password}
         onChange={onChange}
       />
-      {errors.password && <span className={styles.error}>{errors.password}</span>}
- 
-      <label className={styles.label} htmlFor="confirmPassword">Confirm password</label>
+      {errors.password && (
+        <span className={styles.error}>{errors.password}</span>
+      )}
+
+      <label className={styles.label} htmlFor="confirmPassword">
+        Confirm password
+      </label>
       <input
         id="confirmPassword"
         name="confirmPassword"
@@ -145,8 +167,10 @@ function StepTwo({ formData, onChange, errors, onNext, onBack }) {
         value={formData.confirmPassword}
         onChange={onChange}
       />
-      {errors.confirmPassword && <span className={styles.error}>{errors.confirmPassword}</span>}
- 
+      {errors.confirmPassword && (
+        <span className={styles.error}>{errors.confirmPassword}</span>
+      )}
+
       <div className={styles.actions}>
         <button type="button" className={styles.ghostBtn} onClick={onBack}>
           ← Back
@@ -158,17 +182,19 @@ function StepTwo({ formData, onChange, errors, onNext, onBack }) {
     </div>
   );
 }
- 
+
 function StepThree({ formData, onBack, onSubmit }) {
   return (
     <div className={styles.stepContent}>
       <h2 className={styles.title}>Confirm Details</h2>
       <p className={styles.subtitle}>Review before submitting</p>
- 
+
       <div className={styles.summaryCard}>
         <div className={styles.summaryRow}>
           <span className={styles.summaryKey}>Name</span>
-          <span className={styles.summaryVal}>{formData.firstName} {formData.lastName}</span>
+          <span className={styles.summaryVal}>
+            {formData.firstName} {formData.lastName}
+          </span>
         </div>
         <div className={styles.summaryRow}>
           <span className={styles.summaryKey}>Email</span>
@@ -183,7 +209,7 @@ function StepThree({ formData, onBack, onSubmit }) {
           <span className={styles.summaryVal}>{formData.role}</span>
         </div>
       </div>
- 
+
       <div className={styles.actions}>
         <button type="button" className={styles.ghostBtn} onClick={onBack}>
           ← Back
@@ -195,16 +221,17 @@ function StepThree({ formData, onBack, onSubmit }) {
     </div>
   );
 }
- 
+
 function SuccessScreen({ formData }) {
   return (
     <div className={styles.stepContent}>
       <div className={styles.successIcon}>✓</div>
       <h2 className={styles.title}>You're all set!</h2>
       <p className={styles.subtitle}>
-        Welcome, <strong>{formData.firstName}</strong>. Your account has been created.
+        Welcome, <strong>{formData.firstName}</strong>. Your account has been
+        created.
       </p>
- 
+
       <div className={styles.summaryCard}>
         <div className={styles.summaryRow}>
           <span className={styles.summaryKey}>Email</span>
@@ -222,32 +249,33 @@ function SuccessScreen({ formData }) {
     </div>
   );
 }
- 
+
 /* ─── Parent shell ───────────────────────────── */
- 
+
 function RegistrationForm() {
-  // 🔧 YOUR TURN: add useState for step, formData, errors here
- 
-  const step = 1; // placeholder — replace with state
-  const formData = {
-    firstName: "", lastName: "", email: "",
-    username: "", role: "student",
-    password: "", confirmPassword: "",
-  };
-  const errors = {};
- 
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    role: "student",
+    password: "",
+    confirmPassword: "",
+  });
+  const [errors, setErrors] = useState({});
+
   // 🔧 YOUR TURN: implement these
   const handleChange = (e) => {};
-  const handleNext   = () => {};
-  const handleBack   = () => {};
+  const handleNext = () => {};
+  const handleBack = () => {};
   const handleSubmit = () => {};
- 
+
   return (
     <div className={styles.wrapper}>
       <form className={styles.formCard} onSubmit={(e) => e.preventDefault()}>
- 
         {step !== "done" && <StepIndicator currentStep={step} />}
- 
+
         {step === 1 && (
           <StepOne
             formData={formData}
@@ -273,11 +301,9 @@ function RegistrationForm() {
           />
         )}
         {step === "done" && <SuccessScreen formData={formData} />}
- 
       </form>
     </div>
   );
 }
- 
+
 export default RegistrationForm;
- 
