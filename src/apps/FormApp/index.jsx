@@ -265,8 +265,21 @@ function RegistrationForm() {
   });
   const [errors, setErrors] = useState({});
 
-  // 🔧 YOUR TURN: implement these
-  const handleChange = (e) => {};
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setErrors((prev) => {
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
+  };
+
   const handleNext = () => {};
   const handleBack = () => {};
   const handleSubmit = () => {};
