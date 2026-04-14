@@ -3,19 +3,21 @@ import { useState, useEffect } from "react";
 
 function GithubFinder() {
   const [name, setName] = useState("");
+  const [data, setData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(`https://api.github.com/users/${name}`);
       const result = await response.json();
       console.log(result);
+      setData(result);
     };
     fetchData();
   }, [name]);
 
-  function handleSearch(event) {  
-    setName(event.target.value) 
-}
+  function handleSearch(event) {
+    setName(event.target.value);
+  }
 
   return (
     <>
@@ -27,7 +29,11 @@ function GithubFinder() {
         />
       </div>
 
-      
+      <img className={styles.profileCard} src={data?.avatar_url} alt="avatar" />
+      <h2>{data?.name}</h2>
+      <p>{data?.bio}</p>
+      <div>Repos: {data?.public_repos}</div>
+      <div>Followers: {data?.followers}</div>
     </>
   );
 }
