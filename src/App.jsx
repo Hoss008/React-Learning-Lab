@@ -8,6 +8,7 @@ import Calculator from "./apps/Calculator/index.jsx";
 import CounterApp from "./apps/CounterApp/index.jsx";
 import ShoppingCart from "./apps/ShoppingCart";
 import Form from "./apps/FormApp/index.jsx";
+import GithubFinder from "./apps/GithubFinder/index.jsx";
 // ─────────────────────────────────────────────────────────────────────
 
 // ─── REGISTER YOUR APPS HERE ─────────────────────────────────────────
@@ -56,6 +57,15 @@ export const APP_REGISTRY = [
     color: "#6bffb8",
     emoji: "📝",
     component: Form,
+  },
+  {
+    id: "githubfinder",
+    title: "GitHub Finder",
+    description: "Fetch API, async/await, and dynamic rendering",
+    tags: ["fetch", "async", "dynamic"],
+    color: "#ff6b6b",
+    emoji: "🔍",
+    component: GithubFinder,
   },
 ];
 // ─────────────────────────────────────────────────────────────────────
