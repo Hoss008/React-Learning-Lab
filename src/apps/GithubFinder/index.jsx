@@ -5,6 +5,7 @@ function GithubFinder() {
   const [name, setName] = useState("");
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const controller = new AbortController();
 
   useEffect(() => {
     if (!name.trim()) return;
@@ -12,7 +13,9 @@ function GithubFinder() {
     setLoading(true);
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://api.github.com/users/${name}`);
+        const response = await fetch(`https://api.github.com/users/${name}`, {
+          signal: controller.signal,
+        });
         const result = await response.json();
         setData(result);
       } catch (err) {
@@ -22,6 +25,9 @@ function GithubFinder() {
       }
     };
     fetchData();
+    return () => {
+      controller.abort(); //clean up function to cancel fetch if component unmounts or name changes before fetch completes
+    };
   }, [name]);
 
   if (loading) return <p>Loading...</p>;
@@ -32,7 +38,6 @@ function GithubFinder() {
 
   return (
     <>
-
       <div className={styles.searchBox}>
         <input
           type="text"
