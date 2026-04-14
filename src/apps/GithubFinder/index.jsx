@@ -4,16 +4,27 @@ import { useState, useEffect } from "react";
 function GithubFinder() {
   const [name, setName] = useState("");
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (!name.trim()) return;
+
+    setLoading(true);
     const fetchData = async () => {
-      const response = await fetch(`https://api.github.com/users/${name}`);
-      const result = await response.json();
-      console.log(result);
-      setData(result);
+      try {
+        const response = await fetch(`https://api.github.com/users/${name}`);
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, [name]);
+
+  if (loading) return <p>Loading...</p>;
 
   function handleSearch(event) {
     setName(event.target.value);
@@ -21,6 +32,7 @@ function GithubFinder() {
 
   return (
     <>
+
       <div className={styles.searchBox}>
         <input
           type="text"
