@@ -280,9 +280,59 @@ function RegistrationForm() {
     });
   };
 
-  const handleNext = () => {};
-  const handleBack = () => {};
-  const handleSubmit = () => {};
+  const handleNext = () => {
+    const nextErrors = {};
+
+    if (step === 1) {
+      if (!formData.firstName.trim()) {
+        nextErrors.firstName = "First name is required";
+      }
+
+      if (!formData.lastName.trim()) {
+        nextErrors.lastName = "Last name is required";
+      }
+
+      if (!formData.email.trim()) {
+        nextErrors.email = "Email is required";
+      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        nextErrors.email = "Please enter a valid email";
+      }
+    }
+
+    if (step === 2) {
+      if (!formData.username.trim()) {
+        nextErrors.username = "Username is required";
+      }
+
+      if (!formData.password) {
+        nextErrors.password = "Password is required";
+      } else if (formData.password.length < 6) {
+        nextErrors.password = "Password must be at least 6 characters";
+      }
+
+      if (!formData.confirmPassword) {
+        nextErrors.confirmPassword = "Please confirm your password";
+      } else if (formData.confirmPassword !== formData.password) {
+        nextErrors.confirmPassword = "Passwords do not match";
+      }
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      return;
+    }
+
+    setErrors({});
+    setStep((prev) => prev + 1);
+  };
+
+  const handleBack = () => {
+    setStep((prev) => prev - 1);
+  };
+
+  const handleSubmit = () => {
+    setStep("done");
+  };
 
   return (
     <div className={styles.wrapper}>
