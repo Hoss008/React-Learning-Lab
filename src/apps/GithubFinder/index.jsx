@@ -6,15 +6,16 @@ function GithubFinder() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://api.example.com/data");
+      const response = await fetch(`https://api.github.com/users/${name}`);
       const result = await response.json();
       console.log(result);
     };
+    fetchData();
   }, [name]);
 
-  function handleSearch(e) {
-    setName(e.target.value);
-  }
+  function handleSearch(event) {  
+    setName(event.target.value) 
+}
 
   return (
     <>
@@ -24,8 +25,9 @@ function GithubFinder() {
           className={styles.searchInput}
           onChange={handleSearch}
         />
-        <h3>NAME : {name}</h3>
       </div>
+
+      
     </>
   );
 }
