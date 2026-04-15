@@ -10,12 +10,10 @@ export default function App() {
   const inputRef = useRef(null);
 
   const handleSearch = useCallback((e) => {
-    console.log("handler called");
     setSearch(e.target.value);
   }, []);
 
   const filteredProducts = useMemo(() => {
-    console.log("filtering...");
     return products.filter((p) =>
     p.name.toLowerCase().includes(search.toLowerCase()),
     );
