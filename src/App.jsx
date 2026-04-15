@@ -9,6 +9,7 @@ import CounterApp from "./apps/CounterApp/index.jsx";
 import ShoppingCart from "./apps/ShoppingCart";
 import Form from "./apps/FormApp/index.jsx";
 import GithubFinder from "./apps/GithubFinder/index.jsx";
+import Hookss from "./apps/Hookss/index.jsx";
 // ─────────────────────────────────────────────────────────────────────
 
 // ─── REGISTER YOUR APPS HERE ─────────────────────────────────────────
@@ -67,6 +68,15 @@ export const APP_REGISTRY = [
     emoji: "🔍",
     component: GithubFinder,
   },
+  {
+    id: "hookss",
+    title: "Hookss",
+    description: "A collection of mini-apps demonstrating various React hooks",
+    tags: ["hooks", "useEffect", "useContext", "useReducer"],
+    color: "#6bffb8",
+    emoji: "🪝",
+    component: Hookss,
+  },  
 ];
 // ─────────────────────────────────────────────────────────────────────
 
