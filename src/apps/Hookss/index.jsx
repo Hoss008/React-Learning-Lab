@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 
-// fake large dataset
 const products = Array.from({ length: 1000 }, (_, i) => ({
   id: i,
   name: `Product ${i}`,
@@ -8,17 +7,22 @@ const products = Array.from({ length: 1000 }, (_, i) => ({
 
 export default function App() {
   const [search, setSearch] = useState("");
-
   const inputRef = useRef(null);
 
-  // 🔴 TODO 2: useCallback for handler
-  const handleSearch = null;
+  const handleSearch = useCallback((e) => {
+    console.log("handler called");
+    setSearch(e.target.value);
+  }, []);
 
-  // 🔴 TODO 3: useMemo for filtering
-  const filteredProducts = [];
+  const filteredProducts = useMemo(() => {
+    console.log("filtering...");
+    return products.filter((p) =>
+    p.name.toLowerCase().includes(search.toLowerCase()),
+    );
+  }, [search]);
 
   useEffect(() => {
-    inputRef.current.focus()
+    inputRef.current.focus();
   }, []);
 
   return (
@@ -30,7 +34,7 @@ export default function App() {
         placeholder="Search..."
         value={search}
         ref={inputRef}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={handleSearch}
       />
 
       <ul>
