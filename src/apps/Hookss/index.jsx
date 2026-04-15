@@ -16,7 +16,7 @@ export default function App() {
   // Think: does it need any dependencies?
   const handleSearch = useCallback((e) => {
     setSearch(e.target.value);
-  });
+  },[]);
 
   // ── TODO 3 · useMemo ─────────────────────────────────
   // Memoize the filtered list.
