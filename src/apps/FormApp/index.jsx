@@ -1,372 +1,135 @@
-import React, { useState } from "react";
+"use client";
+
+import { useActionState } from "react";
+import { z } from "zod";
 import styles from "./form.module.css";
 
-/* ─── Sub-components ─────────────────────────── */
+// Step 1: Define the validation schema with Zod
+const formSchema = z.object({
+  username: z
+    .string()
+    .min(3, "Username must be at least 3 characters")
+    .max(20, "Username must be less than 20 characters"),
+  email: z.string().email("Please enter a valid email address"),
+});
 
-function StepIndicator({ currentStep }) {
-  const steps = [
-    { number: 1, label: "Personal" },
-    { number: 2, label: "Account" },
-    { number: 3, label: "Confirm" },
-  ];
+// Step 2: Create the server action (simulating server validation)
+async function submitForm(prevState, formData) {
+  // Get form data
+  const username = formData.get("username");
+  const email = formData.get("email");
 
-  return (
-    <div className={styles.stepIndicator}>
-      {steps.map((s, i) => (
-        <React.Fragment key={s.number}>
-          <div className={styles.stepItem}>
-            <div
-              className={`${styles.stepCircle} ${
-                currentStep === s.number
-                  ? styles.stepActive
-                  : currentStep > s.number
-                    ? styles.stepDone
-                    : ""
-              }`}
-            >
-              {currentStep > s.number ? "✓" : s.number}
-            </div>
-            <span className={styles.stepLabel}>{s.label}</span>
-          </div>
-          {i < steps.length - 1 && (
-            <div
-              className={`${styles.stepLine} ${
-                currentStep > s.number ? styles.stepLineDone : ""
-              }`}
-            />
-          )}
-        </React.Fragment>
-      ))}
-    </div>
-  );
-}
-
-function StepOne({ formData, onChange, errors, onNext }) {
-  return (
-    <div className={styles.stepContent}>
-      <h2 className={styles.title}>Personal Info</h2>
-      <p className={styles.subtitle}>Tell us a bit about yourself</p>
-
-      <label className={styles.label} htmlFor="firstName">
-        First name
-      </label>
-      <input
-        id="firstName"
-        name="firstName"
-        type="text"
-        className={styles.input}
-        placeholder="John"
-        value={formData.firstName}
-        onChange={onChange}
-      />
-      {errors.firstName && (
-        <span className={styles.error}>{errors.firstName}</span>
-      )}
-
-      <label className={styles.label} htmlFor="lastName">
-        Last name
-      </label>
-      <input
-        id="lastName"
-        name="lastName"
-        type="text"
-        className={styles.input}
-        placeholder="Doe"
-        value={formData.lastName}
-        onChange={onChange}
-      />
-      {errors.lastName && (
-        <span className={styles.error}>{errors.lastName}</span>
-      )}
-
-      <label className={styles.label} htmlFor="email">
-        Email
-      </label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        className={styles.input}
-        placeholder="john@example.com"
-        value={formData.email}
-        onChange={onChange}
-      />
-      {errors.email && <span className={styles.error}>{errors.email}</span>}
-
-      <div className={styles.actions}>
-        <button type="button" className={styles.primaryBtn} onClick={onNext}>
-          Next →
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function StepTwo({ formData, onChange, errors, onNext, onBack }) {
-  return (
-    <div className={styles.stepContent}>
-      <h2 className={styles.title}>Account Setup</h2>
-      <p className={styles.subtitle}>Choose your credentials</p>
-
-      <label className={styles.label} htmlFor="username">
-        Username
-      </label>
-      <input
-        id="username"
-        name="username"
-        type="text"
-        className={styles.input}
-        placeholder="johndoe"
-        value={formData.username}
-        onChange={onChange}
-      />
-      {errors.username && (
-        <span className={styles.error}>{errors.username}</span>
-      )}
-
-      <label className={styles.label} htmlFor="role">
-        Role
-      </label>
-      <select
-        id="role"
-        name="role"
-        className={styles.select}
-        value={formData.role}
-        onChange={onChange}
-      >
-        <option value="student">Student</option>
-        <option value="developer">Developer</option>
-        <option value="designer">Designer</option>
-      </select>
-
-      <label className={styles.label} htmlFor="password">
-        Password
-      </label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        className={styles.input}
-        placeholder="Enter secure password"
-        value={formData.password}
-        onChange={onChange}
-      />
-      {errors.password && (
-        <span className={styles.error}>{errors.password}</span>
-      )}
-
-      <label className={styles.label} htmlFor="confirmPassword">
-        Confirm password
-      </label>
-      <input
-        id="confirmPassword"
-        name="confirmPassword"
-        type="password"
-        className={styles.input}
-        placeholder="Repeat your password"
-        value={formData.confirmPassword}
-        onChange={onChange}
-      />
-      {errors.confirmPassword && (
-        <span className={styles.error}>{errors.confirmPassword}</span>
-      )}
-
-      <div className={styles.actions}>
-        <button type="button" className={styles.ghostBtn} onClick={onBack}>
-          ← Back
-        </button>
-        <button type="button" className={styles.primaryBtn} onClick={onNext}>
-          Next →
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function StepThree({ formData, onBack, onSubmit }) {
-  return (
-    <div className={styles.stepContent}>
-      <h2 className={styles.title}>Confirm Details</h2>
-      <p className={styles.subtitle}>Review before submitting</p>
-
-      <div className={styles.summaryCard}>
-        <div className={styles.summaryRow}>
-          <span className={styles.summaryKey}>Name</span>
-          <span className={styles.summaryVal}>
-            {formData.firstName} {formData.lastName}
-          </span>
-        </div>
-        <div className={styles.summaryRow}>
-          <span className={styles.summaryKey}>Email</span>
-          <span className={styles.summaryVal}>{formData.email}</span>
-        </div>
-        <div className={styles.summaryRow}>
-          <span className={styles.summaryKey}>Username</span>
-          <span className={styles.summaryVal}>{formData.username}</span>
-        </div>
-        <div className={styles.summaryRow}>
-          <span className={styles.summaryKey}>Role</span>
-          <span className={styles.summaryVal}>{formData.role}</span>
-        </div>
-      </div>
-
-      <div className={styles.actions}>
-        <button type="button" className={styles.ghostBtn} onClick={onBack}>
-          ← Back
-        </button>
-        <button type="button" className={styles.primaryBtn} onClick={onSubmit}>
-          Submit
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function SuccessScreen({ formData }) {
-  return (
-    <div className={styles.stepContent}>
-      <div className={styles.successIcon}>✓</div>
-      <h2 className={styles.title}>You're all set!</h2>
-      <p className={styles.subtitle}>
-        Welcome, <strong>{formData.firstName}</strong>. Your account has been
-        created.
-      </p>
-
-      <div className={styles.summaryCard}>
-        <div className={styles.summaryRow}>
-          <span className={styles.summaryKey}>Email</span>
-          <span className={styles.summaryVal}>{formData.email}</span>
-        </div>
-        <div className={styles.summaryRow}>
-          <span className={styles.summaryKey}>Username</span>
-          <span className={styles.summaryVal}>{formData.username}</span>
-        </div>
-        <div className={styles.summaryRow}>
-          <span className={styles.summaryKey}>Role</span>
-          <span className={styles.summaryVal}>{formData.role}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Parent shell ───────────────────────────── */
-
-function RegistrationForm() {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    username: "",
-    role: "student",
-    password: "",
-    confirmPassword: "",
-  });
-  const [errors, setErrors] = useState({});
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-
-    setErrors((prev) => {
-      const next = { ...prev };
-      delete next[name];
-      return next;
+  try {
+    // Validate the data using Zod schema
+    const validatedData = formSchema.parse({
+      username,
+      email,
     });
-  };
 
-  const handleNext = () => {
-    const nextErrors = {};
+    // Simulate a small delay (like an API call)
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
-    if (step === 1) {
-      if (!formData.firstName.trim()) {
-        nextErrors.firstName = "First name is required";
-      }
+    // Return success state
+    return {
+      success: true,
+      message: `Welcome ${validatedData.username}! 🎉`,
+      data: validatedData,
+      errors: {},
+    };
+  } catch (error) {
+    // Handle validation errors
+    if (error instanceof z.ZodError) {
+      const fieldErrors = {};
+      error.errors.forEach((err) => {
+        fieldErrors[err.path[0]] = err.message;
+      });
 
-      if (!formData.lastName.trim()) {
-        nextErrors.lastName = "Last name is required";
-      }
-
-      if (!formData.email.trim()) {
-        nextErrors.email = "Email is required";
-      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-        nextErrors.email = "Please enter a valid email";
-      }
+      return {
+        success: false,
+        message: "Please fix the errors below",
+        errors: fieldErrors,
+      };
     }
 
-    if (step === 2) {
-      if (!formData.username.trim()) {
-        nextErrors.username = "Username is required";
-      }
+    // Handle unexpected errors
+    return {
+      success: false,
+      message: "An unexpected error occurred",
+      errors: {},
+    };
+  }
+}
 
-      if (!formData.password) {
-        nextErrors.password = "Password is required";
-      } else if (formData.password.length < 6) {
-        nextErrors.password = "Password must be at least 6 characters";
-      }
-
-      if (!formData.confirmPassword) {
-        nextErrors.confirmPassword = "Please confirm your password";
-      } else if (formData.confirmPassword !== formData.password) {
-        nextErrors.confirmPassword = "Passwords do not match";
-      }
-    }
-
-    if (Object.keys(nextErrors).length > 0) {
-      setErrors(nextErrors);
-      return;
-    }
-
-    setErrors({});
-    setStep((prev) => prev + 1);
-  };
-
-  const handleBack = () => {
-    setStep((prev) => prev - 1);
-  };
-
-  const handleSubmit = () => {
-    setStep("done");
-  };
+// Step 3: Create the form component
+export default function FormApp() {
+  // useActionState manages form state, submission, and errors
+  const [state, formAction, isPending] = useActionState(submitForm, {
+    success: false,
+    message: "",
+    errors: {},
+    data: null,
+  });
 
   return (
-    <div className={styles.wrapper}>
-      <form className={styles.formCard} onSubmit={(e) => e.preventDefault()}>
-        {step !== "done" && <StepIndicator currentStep={step} />}
+    <div className={styles.container}>
+      <h1>Simple Form with useActionState & Zod</h1>
 
-        {step === 1 && (
-          <StepOne
-            formData={formData}
-            onChange={handleChange}
-            errors={errors}
-            onNext={handleNext}
+      {/* Success message */}
+      {state.success && (
+        <div className={styles.successMessage}>
+          ✅ {state.message}
+          <p>Your email: {state.data?.email}</p>
+        </div>
+      )}
+
+      {/* Error/info message */}
+      {!state.success && state.message && (
+        <div className={styles.infoMessage}>{state.message}</div>
+      )}
+
+      {/* Form */}
+      <form action={formAction} className={styles.form}>
+        {/* Username field */}
+        <div className={styles.formGroup}>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            defaultValue=""
+            disabled={isPending}
+            className={state.errors.username ? styles.inputError : ""}
           />
-        )}
-        {step === 2 && (
-          <StepTwo
-            formData={formData}
-            onChange={handleChange}
-            errors={errors}
-            onNext={handleNext}
-            onBack={handleBack}
+          {state.errors.username && (
+            <span className={styles.errorText}>{state.errors.username}</span>
+          )}
+        </div>
+
+        {/* Email field */}
+        <div className={styles.formGroup}>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            defaultValue=""
+            disabled={isPending}
+            className={state.errors.email ? styles.inputError : ""}
           />
-        )}
-        {step === 3 && (
-          <StepThree
-            formData={formData}
-            onBack={handleBack}
-            onSubmit={handleSubmit}
-          />
-        )}
-        {step === "done" && <SuccessScreen formData={formData} />}
+          {state.errors.email && (
+            <span className={styles.errorText}>{state.errors.email}</span>
+          )}
+        </div>
+
+        {/* Submit button */}
+        <button
+          type="submit"
+          disabled={isPending}
+          className={styles.submitButton}
+        >
+          {isPending ? "Submitting..." : "Submit"}
+        </button>
       </form>
     </div>
   );
 }
-
-export default RegistrationForm;
