@@ -1,26 +1,29 @@
 import { createContext, useContext, useState } from "react";
 
-// 1. CREATE YOUR CONTEXT HERE
-
-export const ThemeContext = createContext();
-// This creates a "channel" where data can be shared
+export const ThemeContext = createContext("light");
 
 function App() {
-  // This is the data we want to broadcast!
   const [theme, setTheme] = useState("light");
 
-  const toggleTheme = () => {
+  function toggleTheme() {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }
+
+  const appStyle = {
+    backgroundColor: theme === "dark" ? "#1a1a1a" : "#ffffff",
+    color: theme === "dark" ? "#ffffff" : "#000000",
+    minHeight: "100vh",
+    padding: "20px",
+    transition: "all 0.3s ease",
   };
 
   return (
     // 2. PROVIDE YOUR (data) CONTEXT HERE
     // Hint: Wrap the div below with your Provider and pass currentTheme as the value.
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div>
-        <h1>My Cool App</h1>
+      <div style={appStyle}>
+        <Navbar />
       </div>
-      <Navbar />
     </ThemeContext.Provider>
   );
 }
@@ -28,24 +31,40 @@ function App() {
 // Notice how Navbar doesn't take any props!
 // It's just a middleman, so we leave it alone.
 function Navbar() {
+  const { theme } = useContext(ThemeContext);
+
+  const navStyle = {
+    padding: "20px",
+    border: `3px solid ${theme === "dark" ? "#444" : "#ccc"}`,
+    backgroundColor: theme === "dark" ? "#2a2a2a" : "#f5f5f5",
+    color: theme === "dark" ? "#ffffff" : "#000000",
+    borderRadius: "8px",
+    marginTop: "20px",
+    transition: "all 0.3s ease",
+  };
+
   return (
-    <nav style={{ padding: "20px", border: "3px solid gray" }}>
-      <p>Navigation Menu</p>
+    <nav style={navStyle}>
       <ThemeButton />
     </nav>
   );
 }
 
 function ThemeButton() {
-    
   // 3. CONSUME YOUR CONTEXT HERE
-  // Hint: Use the useContext hook to grab the theme value.
+  // Hint: Use the useContext hook to grab the theme value. destructe and read data
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   const buttonStyle = {
-    backgroundColor: theme === "dark" ? "black" : "white",
-    color: theme === "dark" ? "white" : "black",
-    padding: "10px",
+    backgroundColor: theme === "dark" ? "#444" : "#ddd",
+    color: theme === "dark" ? "#ffffff" : "#000000",
+    padding: "10px 15px",
+    border: `2px solid ${theme === "dark" ? "#666" : "#999"}`,
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: "bold",
+    transition: "all 0.3s ease",
   };
 
   return (
