@@ -10,6 +10,7 @@ import ShoppingCart from "./apps/ShoppingCart";
 import Form from "./apps/FormApp/index.jsx";
 import GithubFinder from "./apps/GithubFinder/index.jsx";
 import Hookss from "./apps/Hookss/index.jsx";
+import Theme from "./apps/ThemeToggle/index.jsx";
 // ─────────────────────────────────────────────────────────────────────
 
 // ─── REGISTER YOUR APPS HERE ─────────────────────────────────────────
@@ -76,7 +77,16 @@ export const APP_REGISTRY = [
     color: "#6bffb8",
     emoji: "🪝",
     component: Hookss,
-  },  
+  },
+  {
+    id: "theme-toggle",
+    title: "Theme Toggle",
+    description: "A simple app to toggle between light and dark themes",
+    tags: ["theme", "toggle", "dark mode"],
+    color: "#ff6b6b",
+    emoji: "🎨",
+    component: Theme,
+  },
 ];
 // ─────────────────────────────────────────────────────────────────────
 

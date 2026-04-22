@@ -3,6 +3,7 @@ import "./AppShell.css";
 
 export default function AppShell({ app, children }) {
   const tags = app?.tags ?? [];
+  const shellContentClass = app?.layout === "wide" ? "shell-content shell-content--wide" : "shell-content";
 
   return (
     <div className="shell">
@@ -22,7 +23,7 @@ export default function AppShell({ app, children }) {
           ))}
         </div>
       </nav>
-      <main className="shell-content">{children}</main>
+      <main className={shellContentClass}>{children}</main>
     </div>
   );
 }
