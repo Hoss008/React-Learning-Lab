@@ -1,23 +1,32 @@
-import { useState, useRef } from 'react';
-import { useFetch } from './hooks/useFetch';
-import { useDebounce } from './hooks/useDebounce';
-import { useLocalStorage } from './hooks/useLocalStorage';
-import { useOnClickOutside } from './hooks/useOnClickOutside';
-import styles from './styles.module.css';
+import { useState, useRef } from "react";
+import { useFetch } from "./hooks/useFetch";
+import { useDebounce } from "./hooks/useDebounce";
+import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useOnClickOutside } from "./hooks/useOnClickOutside";
+import styles from "./styles.module.css";
 
 export default function CustomHooksShowcase() {
   // State for useFetch demo
-  const [fetchUrl, setFetchUrl] = useState('https://api.github.com/users/github');
-  const { data: fetchData, loading: fetchLoading, error: fetchError } = useFetch(fetchUrl);
+  const [fetchUrl, setFetchUrl] = useState(
+    "https://api.github.com/users/github",
+  );
+  const {
+    data: fetchData,
+    loading: fetchLoading,
+    error: fetchError,
+  } = useFetch(fetchUrl);
 
   // State for useDebounce demo
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
   const debouncedValue = useDebounce(searchInput, 500);
   const [isTyping, setIsTyping] = useState(false);
 
   // State for useLocalStorage demo
-  const [storageInput, setStorageInput] = useState('');
-  const [storageItems, setStorageItems] = useLocalStorage('customHooksItems', []);
+  const [storageInput, setStorageInput] = useState("");
+  const [storageItems, setStorageItems] = useLocalStorage(
+    "customHooksItems",
+    [],
+  );
 
   // State for useOnClickOutside demo
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +38,7 @@ export default function CustomHooksShowcase() {
   // ==================== USE FETCH HANDLERS ====================
   const handleFetch = async () => {
     // Logic will be implemented inside the useFetch hook
-    console.log('Fetch triggered for:', fetchUrl);
+    console.log("Fetch triggered for:", fetchUrl);
   };
 
   // ==================== USE DEBOUNCE HANDLERS ====================
@@ -53,16 +62,16 @@ export default function CustomHooksShowcase() {
         timestamp: new Date().toLocaleTimeString(),
       };
       setStorageItems([...storageItems, newItem]);
-      setStorageInput('');
+      setStorageInput("");
     }
   };
 
   const handleDeleteItem = (id) => {
-    setStorageItems(storageItems.filter(item => item.id !== id));
+    setStorageItems(storageItems.filter((item) => item.id !== id));
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleAddItem();
     }
   };
@@ -89,16 +98,21 @@ export default function CustomHooksShowcase() {
         <div className={styles.demoInfo}>
           <h3>📚 About This Demo</h3>
           <p>
-            This showcase demonstrates four powerful custom hooks that you can use in your React applications:
+            This showcase demonstrates four powerful custom hooks that you can
+            use in your React applications:
           </p>
           <p>
-            <strong>useFetch</strong> - Fetches data from APIs with loading and error states
+            <strong>useFetch</strong> - Fetches data from APIs with loading and
+            error states
             <br />
-            <strong>useDebounce</strong> - Delays rapid state updates (useful for search inputs)
+            <strong>useDebounce</strong> - Delays rapid state updates (useful
+            for search inputs)
             <br />
-            <strong>useLocalStorage</strong> - Syncs state with browser's localStorage
+            <strong>useLocalStorage</strong> - Syncs state with browser's
+            localStorage
             <br />
-            <strong>useOnClickOutside</strong> - Closes modals or dropdowns on outside clicks
+            <strong>useOnClickOutside</strong> - Closes modals or dropdowns on
+            outside clicks
           </p>
         </div>
 
@@ -119,13 +133,20 @@ export default function CustomHooksShowcase() {
                   onChange={(e) => setFetchUrl(e.target.value)}
                   placeholder="Enter API URL"
                 />
-                <button className={styles.fetchButton} onClick={handleFetch} disabled={fetchLoading}>
-                  {fetchLoading ? 'Loading...' : 'Fetch'}
+                <button
+                  className={styles.fetchButton}
+                  onClick={handleFetch}
+                  disabled={fetchLoading}
+                >
+                  {fetchLoading ? "Loading..." : "Fetch"}
                 </button>
               </div>
 
               {fetchLoading && (
-                <div className={styles.fetchStatus} style={{ background: '#e3f2fd', color: '#1976d2' }}>
+                <div
+                  className={styles.fetchStatus}
+                  style={{ background: "#e3f2fd", color: "#1976d2" }}
+                >
                   <span>Loading data...</span>
                 </div>
               )}
@@ -144,12 +165,15 @@ export default function CustomHooksShowcase() {
 
               {fetchData && (
                 <div className={styles.dataDisplay}>
-                  {typeof fetchData === 'object' ? JSON.stringify(fetchData, null, 2) : fetchData}
+                  {typeof fetchData === "object"
+                    ? JSON.stringify(fetchData, null, 2)
+                    : fetchData}
                 </div>
               )}
 
               <div className={styles.hint}>
-                💡 <strong>Tip:</strong> Try fetching from https://api.github.com/users/github or any public API
+                💡 <strong>Tip:</strong> Try fetching from
+                https://api.github.com/users/github or any public API
               </div>
             </div>
           </div>
@@ -173,12 +197,12 @@ export default function CustomHooksShowcase() {
               <div className={styles.debounceInfo}>
                 <div className={styles.infoBox}>
                   <h4>Current Input</h4>
-                  <p>{searchInput || '-'}</p>
+                  <p>{searchInput || "-"}</p>
                 </div>
 
                 <div className={styles.infoBox}>
                   <h4>Debounced Value</h4>
-                  <p>{debouncedValue || '-'}</p>
+                  <p>{debouncedValue || "-"}</p>
                 </div>
               </div>
 
@@ -189,8 +213,9 @@ export default function CustomHooksShowcase() {
               )}
 
               <div className={styles.hint}>
-                💡 <strong>How it works:</strong> The debounced value updates 500ms after you stop typing.
-                Useful for search, autocomplete, and API calls.
+                💡 <strong>How it works:</strong> The debounced value updates
+                500ms after you stop typing. Useful for search, autocomplete,
+                and API calls.
               </div>
             </div>
           </div>
@@ -220,22 +245,34 @@ export default function CustomHooksShowcase() {
                     <li key={item.id} className={styles.storageItem}>
                       <div>
                         <span>{item.value}</span>
-                        <div style={{ fontSize: '0.8rem', color: '#999', marginTop: '0.25rem' }}>
+                        <div
+                          style={{
+                            fontSize: "0.8rem",
+                            color: "#999",
+                            marginTop: "0.25rem",
+                          }}
+                        >
                           {item.timestamp}
                         </div>
                       </div>
-                      <button className={styles.deleteBtn} onClick={() => handleDeleteItem(item.id)}>
+                      <button
+                        className={styles.deleteBtn}
+                        onClick={() => handleDeleteItem(item.id)}
+                      >
                         Delete
                       </button>
                     </li>
                   ))}
                 </ul>
               ) : (
-                <div className={styles.emptyMessage}>No items yet. Add one to get started!</div>
+                <div className={styles.emptyMessage}>
+                  No items yet. Add one to get started!
+                </div>
               )}
 
               <div className={styles.hint}>
-                💡 <strong>Note:</strong> These items will persist in browser storage (implement with useLocalStorage)
+                💡 <strong>Note:</strong> These items will persist in browser
+                storage (implement with useLocalStorage)
               </div>
             </div>
           </div>
@@ -253,13 +290,22 @@ export default function CustomHooksShowcase() {
               </button>
 
               <div className={styles.hint}>
-                💡 <strong>How it works:</strong> Click the button to open a modal. Click outside the modal
-                to close it. The useOnClickOutside hook will handle detecting clicks outside.
+                💡 <strong>How it works:</strong> Click the button to open a
+                modal. Click outside the modal to close it. The
+                useOnClickOutside hook will handle detecting clicks outside.
               </div>
 
-              <div style={{ marginTop: '1rem', padding: '1rem', background: '#f0f0f0', borderRadius: '6px' }}>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#666' }}>
-                  <strong>Use Cases:</strong> Dropdowns, tooltips, modals, sidebars, autocomplete menus
+              <div
+                style={{
+                  marginTop: "1rem",
+                  padding: "1rem",
+                  background: "#f0f0f0",
+                  borderRadius: "6px",
+                }}
+              >
+                <p style={{ margin: 0, fontSize: "0.9rem", color: "#666" }}>
+                  <strong>Use Cases:</strong> Dropdowns, tooltips, modals,
+                  sidebars, autocomplete menus
                 </p>
               </div>
             </div>
@@ -269,17 +315,30 @@ export default function CustomHooksShowcase() {
         {/* ==================== MODAL ==================== */}
         {isModalOpen && (
           <div className={styles.modalOverlay} onClick={closeModal}>
-            <div className={styles.modal} ref={modalRef} onClick={(e) => e.stopPropagation()}>
+            <div
+              className={styles.modal}
+              ref={modalRef}
+              onClick={(e) => e.stopPropagation()}
+            >
               <h3>✨ Modal Title</h3>
               <p>
-                This modal demonstrates the useOnClickOutside hook. Click outside this modal (on the dark
-                overlay) to close it. The hook will automatically detect the outside click and trigger the
+                This modal demonstrates the useOnClickOutside hook. Click
+                outside this modal (on the dark overlay) to close it. The hook
+                will automatically detect the outside click and trigger the
                 close handler.
               </p>
 
-              <div style={{ padding: '1rem', background: '#f0f0f0', borderRadius: '6px', marginBottom: '1.5rem' }}>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#666' }}>
-                  💡 <strong>Tip:</strong> Try clicking outside this box to close the modal!
+              <div
+                style={{
+                  padding: "1rem",
+                  background: "#f0f0f0",
+                  borderRadius: "6px",
+                  marginBottom: "1.5rem",
+                }}
+              >
+                <p style={{ margin: 0, fontSize: "0.9rem", color: "#666" }}>
+                  💡 <strong>Tip:</strong> Try clicking outside this box to
+                  close the modal!
                 </p>
               </div>
 

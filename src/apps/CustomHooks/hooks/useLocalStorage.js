@@ -1,21 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 /**
  * useLocalStorage Hook
- * 
+ *
  * Syncs state with browser's localStorage
  * Values persist across page refreshes and browser sessions
- * 
+ *
  * @param {string} key - The key to store in localStorage
  * @param {*} initialValue - The initial value if nothing is stored
- * 
+ *
  * @returns {array} [value, setValue]
  *   - value: Current value from localStorage
  *   - setValue: Function to update the value (updates both state and storage)
- * 
+ *
  * @example
  * const [name, setName] = useLocalStorage('userName', '');
- * 
+ *
  * const handleChange = (e) => {
  *   setName(e.target.value); // Updates state and localStorage
  * };
@@ -33,7 +33,7 @@ export function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    console.log('TODO: Implement useLocalStorage logic for key:', key);
+    console.log("TODO: Implement useLocalStorage logic for key:", key);
   }, [key]);
 
   return [value, setValue];
