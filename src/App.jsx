@@ -11,6 +11,7 @@ import Form from "./apps/FormApp/index.jsx";
 import GithubFinder from "./apps/GithubFinder/index.jsx";
 import Hookss from "./apps/Hookss/index.jsx";
 import Theme from "./apps/ThemeToggle/index.jsx";
+import CustomHooks from "./apps/CustomHooks/index.jsx";
 // ─────────────────────────────────────────────────────────────────────
 
 // ─── REGISTER YOUR APPS HERE ─────────────────────────────────────────
@@ -87,6 +88,15 @@ export const APP_REGISTRY = [
     emoji: "🎨",
     component: Theme,
   },
+  {
+    id: "custom-hooks",
+    title: "Custom Hooks",
+    description: "A showcase of custom React hooks for reusable logic",
+    tags: ["custom hooks", "reusable logic", "useCustomHook"],
+    color: "#6bffb8",
+    emoji: "🛠️",
+    component: CustomHooks,
+  }, 
 ];
 // ─────────────────────────────────────────────────────────────────────
 
