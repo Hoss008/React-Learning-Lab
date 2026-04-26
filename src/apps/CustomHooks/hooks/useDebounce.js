@@ -21,6 +21,7 @@ import { useState, useEffect } from "react";
  * }, [debouncedSearch]);
  */
 export function useDebounce(value, delay = 500) {
+  // eslint-disable-next-line no-unused-vars
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
@@ -28,8 +29,6 @@ export function useDebounce(value, delay = 500) {
     // 1. Set up a timeout that updates debouncedValue after the delay
     // 2. Clear the timeout if the effect runs again (dependency change)
     // 3. Return cleanup function to clear timeout on unmount
-
-    console.log("TODO: Implement useDebounce logic");
   }, [value, delay]);
 
   return debouncedValue;

@@ -25,6 +25,7 @@ CustomHooks/
 **Purpose:** Fetch data from APIs with automatic loading and error handling.
 
 **Requirements:**
+
 - Accept a URL and optional fetch options
 - Return `{ data, loading, error }`
 - Automatically fetch when URL changes
@@ -32,6 +33,7 @@ CustomHooks/
 - (Optional) Support AbortController for cleanup
 
 **Implementation Tips:**
+
 - Use `fetch()` API
 - Set loading state before fetch
 - Clear previous error when fetching
@@ -45,17 +47,20 @@ CustomHooks/
 **Purpose:** Delay value updates until user stops making changes (e.g., search input).
 
 **Requirements:**
+
 - Accept a value and delay (ms)
 - Return the debounced value
 - Use `setTimeout` to delay updates
 
 **Implementation Tips:**
+
 - Create a timer that updates debouncedValue
 - Clear timer on each dependency change
 - Return cleanup function to clear timer
 - Default delay: 500ms
 
 **Use Cases:**
+
 - Search inputs (reduce API calls)
 - Auto-save functionality
 - Form validation
@@ -68,6 +73,7 @@ CustomHooks/
 **Purpose:** Sync React state with browser's localStorage for persistence.
 
 **Requirements:**
+
 - Accept a key and initial value
 - Return `[value, setValue]` (like useState)
 - Persist value to localStorage
@@ -75,6 +81,7 @@ CustomHooks/
 - Handle JSON serialization/deserialization
 
 **Implementation Tips:**
+
 - Read from `localStorage.getItem(key)` on init
 - Parse JSON if stored as string
 - In setter, store to `localStorage.setItem(key, JSON.stringify(value))`
@@ -82,6 +89,7 @@ CustomHooks/
 - (Optional) Listen for storage changes in other tabs
 
 **Use Cases:**
+
 - User preferences
 - Form auto-save
 - App theme settings
@@ -94,6 +102,7 @@ CustomHooks/
 **Purpose:** Detect clicks outside a DOM element (for closing modals, dropdowns).
 
 **Requirements:**
+
 - Accept a ref and handler function
 - Attach click listener to document
 - Check if click is outside the ref element
@@ -101,6 +110,7 @@ CustomHooks/
 - Cleanup listener on unmount
 
 **Implementation Tips:**
+
 - Add event listener on mount
 - Use `ref.current.contains(e.target)` to check if click is inside
 - Remove listener on unmount (cleanup)
@@ -108,6 +118,7 @@ CustomHooks/
 - (Optional) Handle touch events for mobile
 
 **Use Cases:**
+
 - Close modals
 - Close dropdowns/menus
 - Close tooltips
@@ -118,24 +129,30 @@ CustomHooks/
 ## Testing Your Implementation
 
 ### For useFetch:
+
 ```jsx
-const { data, loading, error } = useFetch('https://api.github.com/users/github');
+const { data, loading, error } = useFetch(
+  "https://api.github.com/users/github",
+);
 // Try entering different API URLs in the input field
 ```
 
 ### For useDebounce:
+
 ```jsx
 const debouncedSearch = useDebounce(searchInput, 500);
 // Type in the search box and notice the delay before debounced value updates
 ```
 
 ### For useLocalStorage:
+
 ```jsx
-const [items, setItems] = useLocalStorage('items', []);
+const [items, setItems] = useLocalStorage("items", []);
 // Refresh the page—items should persist!
 ```
 
 ### For useOnClickOutside:
+
 ```jsx
 useOnClickOutside(modalRef, () => setIsModalOpen(false));
 // Click outside the modal to close it

@@ -39,7 +39,5 @@ export function useOnClickOutside(ref, handler) {
     // 4. Attach listener to document
     // 5. Return cleanup function to remove the listener
     // 6. Consider touch events for mobile devices
-
-    console.log("TODO: Implement useOnClickOutside logic");
   }, [ref]);
 }

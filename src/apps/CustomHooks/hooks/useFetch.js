@@ -20,9 +20,12 @@ import { useState, useEffect } from "react";
  * if (error) return <div>Error: {error}</div>;
  * return <div>{JSON.stringify(data)}</div>;
  */
-export function useFetch(url, options = {}) {
+export function useFetch(url, _options = {}) {
+  // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -35,8 +38,6 @@ export function useFetch(url, options = {}) {
     // 4. Handle error: set error message and clear data
     // 5. Set loading to false
     // 6. Add cleanup for AbortController if needed
-
-    console.log("TODO: Implement useFetch logic for URL:", url);
   }, [url]);
 
   return { data, loading, error };

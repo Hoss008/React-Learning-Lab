@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 /**
  * useLocalStorage Hook
@@ -32,9 +32,7 @@ export function useLocalStorage(key, initialValue) {
 
   const [value, setValue] = useState(initialValue);
 
-  useEffect(() => {
-    console.log("TODO: Implement useLocalStorage logic for key:", key);
-  }, [key]);
+  // TODO: Add useEffect to handle localStorage sync
 
   return [value, setValue];
 }

@@ -36,9 +36,8 @@ export default function CustomHooksShowcase() {
   useOnClickOutside(modalRef, () => setIsModalOpen(false));
 
   // ==================== USE FETCH HANDLERS ====================
-  const handleFetch = async () => {
+  const handleFetch = () => {
     // Logic will be implemented inside the useFetch hook
-    console.log("Fetch triggered for:", fetchUrl);
   };
 
   // ==================== USE DEBOUNCE HANDLERS ====================
