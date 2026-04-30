@@ -1,6 +1,9 @@
 import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 
 function AppLayout() {
+  const navigation = useNavigation()
+
   return (
     <div>
       <header>this will be the layout - Header </header>
@@ -13,4 +16,4 @@ function AppLayout() {
 }
 
 export default AppLayout;
-//render routes here
+//2-render routes here
