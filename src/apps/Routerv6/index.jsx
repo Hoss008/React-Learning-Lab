@@ -1,12 +1,17 @@
+import Home from '../../components/Home';
+import { BrowserRouter, Routes, Route, createBrowserRouter, Outlet } from 'react-router-dom';
+
 function Routing() {
+    const router = createBrowserRouter([{
+        element: <Home />,
+        path: '/',
+    }])
+
   return (
-    <div>
-      <header>this will be the layout - Header </header>
-      
-      <footer>this will be the layout - Footer </footer>
-    </div>
-  );
-}
+    <>
+    </>
+  )}
+  //define routes here
 
 export default Routing;
 //this will be the layout (header , footer ,content)
