@@ -12,6 +12,7 @@ import GithubFinder from "./apps/GithubFinder/index.jsx";
 import Hookss from "./apps/Hookss/index.jsx";
 import Theme from "./apps/ThemeToggle/index.jsx";
 import CustomHooks from "./apps/CustomHooks/index.jsx";
+import Routerv6 from "./apps/Routerv6/index.jsx";
 // ─────────────────────────────────────────────────────────────────────
 
 // ─── REGISTER YOUR APPS HERE ─────────────────────────────────────────
@@ -96,7 +97,16 @@ export const APP_REGISTRY = [
     color: "#6bffb8",
     emoji: "🛠️",
     component: CustomHooks,
-  }, 
+  },
+  {
+    id: "routerv6",
+    title: "Router V6",
+    description: "A demonstration of the new React Router V6 features",
+    tags: ["routing", "navigation", "React Router"],
+    color: "#6bffb8",
+    emoji: "🧭",
+    component: Routerv6,
+  },
 ];
 // ─────────────────────────────────────────────────────────────────────
 
